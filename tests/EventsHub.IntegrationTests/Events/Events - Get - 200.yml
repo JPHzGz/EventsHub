@@ -1,0 +1,20 @@
+info:
+  name: Events - Get - 200
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{baseURL}}/events/:eventid"
+  params:
+    - name: eventid
+      value: 0dc6c97f-0c34-479d-be33-900939b51049
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
