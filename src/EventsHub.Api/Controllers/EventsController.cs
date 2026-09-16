@@ -8,7 +8,7 @@ namespace EventsHub.Api.Controllers
     public class EventsController(AppDbContext context) : BaseApiController
     {
         [HttpGet]
-        public async Task<ActionResult<List<Event>>> GetEventsAsynv()
+        public async Task<ActionResult<List<Event>>> GetEventsAsync()
         {
             return await context.Events.ToListAsync();
         }

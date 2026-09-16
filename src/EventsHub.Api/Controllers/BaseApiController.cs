@@ -4,7 +4,7 @@ namespace EventsHub.Api.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class BaseApiController : Controller
+    public class BaseApiController : ControllerBase
     {
         
     }
