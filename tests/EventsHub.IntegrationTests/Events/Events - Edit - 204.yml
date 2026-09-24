@@ -1,0 +1,31 @@
+info:
+  name: Events - Edit - 204
+  type: http
+  seq: 5
+
+http:
+  method: PUT
+  url: "{{baseURL}}/events"
+  body:
+    type: json
+    data: |-
+      {
+        "id": "0942892e-9973-4bb9-8d60-56d341057910",
+        "title": "{{$randomCatchPhrase}}",
+        "date": "{{$randomDateFuture}}",
+        "description": "{{$randomLoremParagraph}}",
+        "category": "music",
+        "isCancelled": false,
+        "city": "{{$randomCity}}",
+        "venue": "{{$randomStreetName}}",
+        "latitude": "21.0997",
+        "longitude": "-86.7561"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

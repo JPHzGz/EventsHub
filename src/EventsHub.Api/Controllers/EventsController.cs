@@ -29,5 +29,15 @@ namespace EventsHub.Api.Controllers
         {
             return await Mediator.Send(new CreateEvent.Command { Event = @event });
         }
+
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> EditEventAsync(Event @event)
+        {
+            await Mediator.Send(new EditEvent.Command { Event = @event });
+            return NoContent();
+        }
     }
 }
