@@ -1,0 +1,20 @@
+info:
+  name: Events - Delete - 200
+  type: http
+  seq: 6
+
+http:
+  method: DELETE
+  url: "{{baseURL}}/events/:eventid"
+  params:
+    - name: eventid
+      value: 9c4e13af-6692-4383-be0e-7b0171af6cde
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
