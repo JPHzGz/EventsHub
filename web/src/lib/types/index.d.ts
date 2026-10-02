@@ -1,4 +1,4 @@
-type Activity = {
+type AppEvent = {
   id: string;
   title: string;
   date: string;

@@ -3,11 +3,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 function App() {
-  const [activities, setActivities] = useState<Activity[]>([]);
+  const [events, setEvents] = useState<AppEvent[]>([]);
 
   useEffect(() => {
     axios.get("https://localhost:5001/api/v1/events")
-      .then(res => setActivities(res.data));
+      .then(res => setEvents(res.data));
 
     return () => {};
   }, []);
@@ -18,9 +18,9 @@ function App() {
         Events Hub
       </Typography>
       <List>
-        {activities.map((activity: Activity) => (
-          <ListItem key={activity.id}>
-            <ListItemText>{activity.title}</ListItemText>
+        {events.map((event: AppEvent) => (
+          <ListItem key={event.id}>
+            <ListItemText>{event.title}</ListItemText>
           </ListItem>
         ))}
       </List>
