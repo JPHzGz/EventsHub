@@ -1,13 +1,8 @@
-import {
-  Container,
-  CssBaseline,
-  List,
-  ListItem,
-  ListItemText,
-} from "@mui/material";
+import { Container, CssBaseline } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import NavBar from "./NavBar";
+import EventDashboard from "../../features/events/EventDashboard";
 
 function App() {
   const [events, setEvents] = useState<AppEvent[]>([]);
@@ -25,13 +20,7 @@ function App() {
       <CssBaseline />
       <NavBar />
       <Container maxWidth="xl" sx={{ mt: 4 }}>
-        <List>
-          {events.map((event: AppEvent) => (
-            <ListItem key={event.id}>
-              <ListItemText>{event.title}</ListItemText>
-            </ListItem>
-          ))}
-        </List>
+        <EventDashboard events={events} />
       </Container>
     </>
   );
