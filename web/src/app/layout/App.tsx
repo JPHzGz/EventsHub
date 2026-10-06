@@ -1,4 +1,10 @@
-import { CssBaseline, List, ListItem, ListItemText } from "@mui/material";
+import {
+  Container,
+  CssBaseline,
+  List,
+  ListItem,
+  ListItemText,
+} from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import NavBar from "./NavBar";
@@ -18,13 +24,15 @@ function App() {
     <>
       <CssBaseline />
       <NavBar />
-      <List>
-        {events.map((event: AppEvent) => (
-          <ListItem key={event.id}>
-            <ListItemText>{event.title}</ListItemText>
-          </ListItem>
-        ))}
-      </List>
+      <Container maxWidth="xl" sx={{ mt: 4 }}>
+        <List>
+          {events.map((event: AppEvent) => (
+            <ListItem key={event.id}>
+              <ListItemText>{event.title}</ListItemText>
+            </ListItem>
+          ))}
+        </List>
+      </Container>
     </>
   );
 }
