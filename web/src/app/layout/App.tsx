@@ -1,8 +1,8 @@
-import { Container, CssBaseline } from "@mui/material";
+import { Box, Container, CssBaseline } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import NavBar from "./NavBar";
-import EventDashboard from "../../features/events/EventDashboard";
+import EventDashboard from "../../features/events/dashboard/EventDashboard";
 
 function App() {
   const [events, setEvents] = useState<AppEvent[]>([]);
@@ -16,13 +16,13 @@ function App() {
   }, []);
 
   return (
-    <>
+    <Box sx={{ bgcolor: "#f5faf7" }}>
       <CssBaseline />
       <NavBar />
       <Container maxWidth="xl" sx={{ mt: 4 }}>
         <EventDashboard events={events} />
       </Container>
-    </>
+    </Box>
   );
 }
 
