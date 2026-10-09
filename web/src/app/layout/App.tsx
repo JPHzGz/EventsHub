@@ -6,6 +6,9 @@ import EventDashboard from "../../features/events/dashboard/EventDashboard";
 
 function App() {
   const [events, setEvents] = useState<AppEvent[]>([]);
+  const [selectedEvent, setSelectedEvent] = useState<AppEvent | undefined>(
+    undefined,
+  );
 
   useEffect(() => {
     axios
@@ -15,12 +18,25 @@ function App() {
     return () => {};
   }, []);
 
+  const handleSelectEvent = (id: string) => {
+    setSelectedEvent(events.find((ev) => ev.id === id));
+  };
+
+  const handleCancelSelectEvent = () => {
+    setSelectedEvent(undefined);
+  };
+
   return (
     <Box sx={{ bgcolor: "#f5faf7" }}>
       <CssBaseline />
       <NavBar />
       <Container maxWidth="xl" sx={{ mt: 4 }}>
-        <EventDashboard events={events} />
+        <EventDashboard
+          events={events}
+          selectEvent={handleSelectEvent}
+          cancelSelectEvent={handleCancelSelectEvent}
+          selectedEvent={selectedEvent}
+        />
       </Container>
     </Box>
   );

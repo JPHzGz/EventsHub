@@ -4,16 +4,26 @@ import EventDetail from "../details/EventDetail";
 
 type Props = {
   events: AppEvent[];
+  selectEvent: (id: string) => void;
+  cancelSelectEvent: () => void;
+  selectedEvent?: AppEvent;
 };
 
-export default function EventDashboard({ events }: Props) {
+export default function EventDashboard({
+  events,
+  selectEvent,
+  cancelSelectEvent,
+  selectedEvent,
+}: Props) {
   return (
     <Grid container spacing={3}>
       <Grid size={7}>
-        <EventList events={events} />
+        <EventList events={events} selectEvent={selectEvent} />
       </Grid>
       <Grid size={5}>
-        {events[0] && <EventDetail event={events[0]} />}
+        {selectedEvent && (
+          <EventDetail event={selectedEvent} cancel={cancelSelectEvent} />
+        )}
       </Grid>
     </Grid>
   );

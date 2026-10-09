@@ -9,9 +9,10 @@ import {
 
 type Props = {
   event: AppEvent;
+  selectEvent: (id: string) => void;
 };
 
-export default function EventCard({ event }: Props) {
+export default function EventCard({ event, selectEvent }: Props) {
   return (
     <Card>
       <CardContent>
@@ -26,7 +27,13 @@ export default function EventCard({ event }: Props) {
         sx={{ display: "flex", justifyContent: "space-between", pb: 2 }}
       >
         <Chip label={event.category} variant="outlined" />
-        <Button size="medium" variant="contained">View</Button>
+        <Button
+          onClick={() => selectEvent(event.id)}
+          size="medium"
+          variant="contained"
+        >
+          View
+        </Button>
       </CardActions>
     </Card>
   );
