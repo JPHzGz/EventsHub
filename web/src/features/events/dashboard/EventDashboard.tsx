@@ -1,6 +1,7 @@
 import { Grid } from "@mui/material";
 import EventList from "./EventList";
 import EventDetail from "../details/EventDetail";
+import EventForm from "../../form/EventForm";
 
 type Props = {
   events: AppEvent[];
@@ -24,6 +25,7 @@ export default function EventDashboard({
         {selectedEvent && (
           <EventDetail event={selectedEvent} cancel={cancelSelectEvent} />
         )}
+        <EventForm />
       </Grid>
     </Grid>
   );
