@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import EventList from "./EventList";
 import EventDetail from "../details/EventDetail";
-import EventForm from "../../form/EventForm";
+import EventForm from "../form/EventForm";
 
 type Props = {
   events: AppEvent[];
