@@ -10,9 +10,10 @@ import {
 type Props = {
   event: AppEvent;
   cancel: () => void;
+  openForm: (id: string) => void;
 };
 
-export default function EventDetail({ event, cancel }: Props) {
+export default function EventDetail({ event, cancel, openForm }: Props) {
   return (
     <Card sx={{ borderRadius: 3 }}>
       <CardMedia
@@ -27,7 +28,9 @@ export default function EventDetail({ event, cancel }: Props) {
         <Typography variant="body1">{event.description}</Typography>
       </CardContent>
       <CardActions>
-        <Button color="primary">Edit</Button>
+        <Button onClick={() => openForm(event.id)} color="success">
+          Edit
+        </Button>
         <Button onClick={cancel} color="inherit">
           Cancel
         </Button>

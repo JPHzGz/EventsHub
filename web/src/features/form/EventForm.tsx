@@ -1,6 +1,11 @@
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 
-export default function EventForm() {
+type Props = {
+  event?: AppEvent;
+  closeForm: () => void;
+};
+
+export default function EventForm({ event, closeForm }: Props) {
   return (
     <Paper sx={{ borderRadius: 3, p: 3 }}>
       <Typography variant="h5" gutterBottom color="primary">
@@ -10,14 +15,16 @@ export default function EventForm() {
         component="form"
         sx={{ display: "flex", flexDirection: "column", gap: 3 }}
       >
-        <TextField label="Title"></TextField>
-        <TextField label="Description" multiline rows={3}></TextField>
-        <TextField label="Category"></TextField>
-        <TextField label="Date" type="date"></TextField>
-        <TextField label="City"></TextField>
-        <TextField label="Venue"></TextField>
+        <TextField label="Title" value={event?.title} />
+        <TextField label="Description" multiline rows={3} />
+        <TextField label="Category" />
+        <TextField label="Date" type="date" slotProps={{ inputLabel: { shrink: true } }} />
+        <TextField label="City" />
+        <TextField label="Venue" />
         <Box sx={{ display: "flex", justifyContent: "end", gap: 3 }}>
-          <Button color="inherit">Cancel</Button>
+          <Button onClick={closeForm} color="error">
+            Cancel
+          </Button>
           <Button color="success">Save</Button>
         </Box>
       </Box>

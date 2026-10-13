@@ -8,6 +8,9 @@ type Props = {
   selectEvent: (id: string) => void;
   cancelSelectEvent: () => void;
   selectedEvent?: AppEvent;
+  editMode: boolean;
+  openForm: (id: string) => void;
+  closeForm: () => void;
 };
 
 export default function EventDashboard({
@@ -15,6 +18,9 @@ export default function EventDashboard({
   selectEvent,
   cancelSelectEvent,
   selectedEvent,
+  editMode,
+  openForm,
+  closeForm,
 }: Props) {
   return (
     <Grid container spacing={3}>
@@ -22,10 +28,14 @@ export default function EventDashboard({
         <EventList events={events} selectEvent={selectEvent} />
       </Grid>
       <Grid size={5}>
-        {selectedEvent && (
-          <EventDetail event={selectedEvent} cancel={cancelSelectEvent} />
+        {selectedEvent && !editMode && (
+          <EventDetail
+            event={selectedEvent}
+            cancel={cancelSelectEvent}
+            openForm={openForm}
+          />
         )}
-        <EventForm />
+        {editMode && <EventForm event={selectedEvent} closeForm={closeForm} />}
       </Grid>
     </Grid>
   );

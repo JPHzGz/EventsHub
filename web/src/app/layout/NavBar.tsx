@@ -10,7 +10,11 @@ import {
   Typography,
 } from "@mui/material";
 
-export default function NavBar() {
+type Props = {
+  openForm: () => void;
+};
+
+export default function NavBar({ openForm }: Props) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -32,7 +36,12 @@ export default function NavBar() {
               <MenuItem sx={{ fontSize: "1.2rem" }}>About</MenuItem>
               <MenuItem sx={{ fontSize: "1.2rem" }}>Contact</MenuItem>
             </MenuList>
-            <Button size="large" variant="contained" color="success">
+            <Button
+              onClick={openForm}
+              size="large"
+              variant="contained"
+              color="success"
+            >
               Create Event
             </Button>
           </Toolbar>
