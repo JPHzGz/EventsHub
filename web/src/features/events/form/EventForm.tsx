@@ -3,16 +3,23 @@ import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 type Props = {
   event?: AppEvent;
   closeForm: () => void;
+  submitForm: (event: AppEvent) => void;
 };
 
-export default function EventForm({ event, closeForm }: Props) {
-  const handleSubmit = (formEvent: any) => {
+export default function EventForm({ event, closeForm, submitForm }: Props) {
+  const handleSubmit = (
+    formEvent: React.SubmitEvent<HTMLFormElement>,
+  ): void => {
     formEvent.preventDefault();
     const formData = new FormData(formEvent.currentTarget);
     const data: { [key: string]: FormDataEntryValue } = {};
     formData.forEach((value, key) => {
       data[key] = value;
     });
+    if (event) {
+      data.id = event.id;
+    }
+    submitForm(data as unknown as AppEvent);
   };
   return (
     <Paper sx={{ borderRadius: 3, p: 3 }}>
@@ -21,7 +28,7 @@ export default function EventForm({ event, closeForm }: Props) {
       </Typography>
       <Box
         component="form"
-        onClick={handleSubmit}
+        onSubmit={handleSubmit}
         sx={{ display: "flex", flexDirection: "column", gap: 3 }}
       >
         <TextField name="title" label="Title" defaultValue={event?.title} />
@@ -50,7 +57,9 @@ export default function EventForm({ event, closeForm }: Props) {
           <Button onClick={closeForm} color="error">
             Cancel
           </Button>
-          <Button color="primary">Save</Button>
+          <Button type="submit" color="primary">
+            Save
+          </Button>
         </Box>
       </Box>
     </Paper>

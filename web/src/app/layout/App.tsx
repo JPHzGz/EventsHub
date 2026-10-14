@@ -20,7 +20,7 @@ function App() {
   }, []);
 
   const handleSelectEvent = (id: string) => {
-    handleCloseForm();
+    setEditMode(false);
     setSelectedEvent(events.find((ev) => ev.id === id));
   };
 
@@ -41,6 +41,18 @@ function App() {
     setEditMode(false);
   };
 
+  const handleSubmitForm = (event: AppEvent) => {
+    if (event.id) {
+      setSelectedEvent(event);
+      setEvents(events.map((ev) => (ev.id === event.id ? event : ev)));
+    } else {
+      const newEvent = { ...event, id: events.length.toString() };
+      setSelectedEvent(newEvent);
+      setEvents([...events, newEvent]);
+    }
+    setEditMode(false);
+  };
+
   return (
     <Box sx={{ bgcolor: "#f5faf7" }}>
       <CssBaseline />
@@ -54,6 +66,7 @@ function App() {
           editMode={editMode}
           openForm={handleOpenForm}
           closeForm={handleCloseForm}
+          submitForm={handleSubmitForm}
         />
       </Container>
     </Box>
