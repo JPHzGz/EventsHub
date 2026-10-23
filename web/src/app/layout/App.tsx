@@ -53,6 +53,10 @@ function App() {
     setEditMode(false);
   };
 
+  const handleDeleteEvent = (id: string) => {
+    setEvents(events.filter((ev) => ev.id !== id));
+  };
+
   return (
     <Box sx={{ bgcolor: "#f5faf7" }}>
       <CssBaseline />
@@ -67,6 +71,7 @@ function App() {
           openForm={handleOpenForm}
           closeForm={handleCloseForm}
           submitForm={handleSubmitForm}
+          deleteEvent={handleDeleteEvent}
         />
       </Container>
     </Box>

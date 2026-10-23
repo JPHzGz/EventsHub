@@ -12,6 +12,7 @@ type Props = {
   openForm: (id: string) => void;
   closeForm: () => void;
   submitForm: (event: AppEvent) => void;
+  deleteEvent: (id: string) => void;
 };
 
 export default function EventDashboard({
@@ -23,11 +24,16 @@ export default function EventDashboard({
   openForm,
   closeForm,
   submitForm,
+  deleteEvent,
 }: Props) {
   return (
     <Grid container spacing={3}>
       <Grid size={7}>
-        <EventList events={events} selectEvent={selectEvent} />
+        <EventList
+          events={events}
+          selectEvent={selectEvent}
+          deleteEvent={deleteEvent}
+        />
       </Grid>
       <Grid size={5}>
         {selectedEvent && !editMode && (
