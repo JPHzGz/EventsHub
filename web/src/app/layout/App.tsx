@@ -1,25 +1,15 @@
 import { Box, Container, CssBaseline, Typography } from "@mui/material";
-import axios from "axios";
 import { useState } from "react";
 import NavBar from "./NavBar";
 import EventDashboard from "../../features/events/dashboard/EventDashboard";
-import { useQuery } from "@tanstack/react-query";
+import { useEvents } from "../../lib/hooks/useEvents";
 
 function App() {
   const [selectedEvent, setSelectedEvent] = useState<AppEvent | undefined>(
     undefined,
   );
   const [editMode, setEditMode] = useState(false);
-
-  const { data: events, isPending } = useQuery({
-    queryKey: ["events"],
-    queryFn: async () => {
-      const res = await axios.get<AppEvent[]>(
-        "https://localhost:5001/api/v1/events",
-      );
-      return res.data;
-    },
-  });
+  const { events, isPending } = useEvents();
 
   const handleSelectEvent = (id: string) => {
     setEditMode(false);
