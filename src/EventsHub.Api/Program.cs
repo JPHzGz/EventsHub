@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using EventsHub.Persistence;
+using EventsHub.Application.Events.Queries;
+using EventsHub.Application.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,16 +9,20 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-//builder.Services.AddOpenApi();
+builder.Services.AddCors();
+builder.Services.AddMediatR(opt =>
+    opt.RegisterServicesFromAssemblyContaining<GetEventList.Handler>()
+);
+builder.Services.AddCustomMapper(typeof(MappingProfiles).Assembly);
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    //app.MapOpenApi();
-}
+app.UseCors(opt => opt
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .WithOrigins("http://localhost:3000", "https://localhost:3000"));
+if (app.Environment.IsDevelopment()) { }
 
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;

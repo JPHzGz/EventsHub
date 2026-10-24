@@ -16,7 +16,7 @@
         "tags": [
           "Events"
         ],
-        "operationId": "Events_GetEventsAsynv",
+        "operationId": "Events_GetEvents",
         "responses": {
           "200": {
             "description": "",
