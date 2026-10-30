@@ -1,15 +1,16 @@
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
+import { useEvents } from "../../../lib/hooks/useEvents";
 
 type Props = {
   event?: AppEvent;
   closeForm: () => void;
-  submitForm: (event: AppEvent) => void;
 };
 
-export default function EventForm({ event, closeForm, submitForm }: Props) {
-  const handleSubmit = (
+export default function EventForm({ event, closeForm }: Props) {
+  const { updateEvent } = useEvents();
+  const handleSubmit = async (
     formEvent: React.SubmitEvent<HTMLFormElement>,
-  ): void => {
+  ) => {
     formEvent.preventDefault();
     const formData = new FormData(formEvent.currentTarget);
     const data: { [key: string]: FormDataEntryValue } = {};
@@ -18,8 +19,9 @@ export default function EventForm({ event, closeForm, submitForm }: Props) {
     });
     if (event) {
       data.id = event.id;
+      await updateEvent.mutateAsync(data as unknown as AppEvent);
+      closeForm();
     }
-    submitForm(data as unknown as AppEvent);
   };
   return (
     <Paper sx={{ borderRadius: 3, p: 3 }}>
@@ -57,7 +59,7 @@ export default function EventForm({ event, closeForm, submitForm }: Props) {
           <Button onClick={closeForm} color="error">
             Cancel
           </Button>
-          <Button type="submit" color="primary">
+          <Button type="submit" color="primary" loading={updateEvent.isPending}>
             Save
           </Button>
         </Box>

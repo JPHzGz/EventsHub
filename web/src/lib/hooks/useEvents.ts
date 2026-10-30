@@ -1,16 +1,26 @@
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import agent from "../api/agents";
 
 export const useEvents = () => {
+  const queryClient = useQueryClient();
   const { data: events, isPending } = useQuery({
     queryKey: ["events"],
     queryFn: async () => {
-      const res = await axios.get<AppEvent[]>(
-        "https://localhost:5001/api/v1/events",
-      );
+      const res = await agent.get<AppEvent[]>("/events");
       return res.data;
     },
   });
 
-  return { events, isPending };
+  const updateEvent = useMutation({
+    mutationFn: async (event: AppEvent) => {
+      await agent.put("/events", event);
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: ["events"],
+      });
+    },
+  });
+
+  return { events, isPending, updateEvent };
 };

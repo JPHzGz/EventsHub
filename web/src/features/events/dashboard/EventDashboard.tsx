@@ -11,7 +11,6 @@ type Props = {
   editMode: boolean;
   openForm: (id: string) => void;
   closeForm: () => void;
-  submitForm: (event: AppEvent) => void;
   deleteEvent: (id: string) => void;
 };
 
@@ -23,7 +22,6 @@ export default function EventDashboard({
   editMode,
   openForm,
   closeForm,
-  submitForm,
   deleteEvent,
 }: Props) {
   return (
@@ -43,13 +41,7 @@ export default function EventDashboard({
             openForm={openForm}
           />
         )}
-        {editMode && (
-          <EventForm
-            event={selectedEvent}
-            closeForm={closeForm}
-            submitForm={submitForm}
-          />
-        )}
+        {editMode && <EventForm event={selectedEvent} closeForm={closeForm} />}
       </Grid>
     </Grid>
   );

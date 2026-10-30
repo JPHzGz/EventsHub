@@ -33,19 +33,6 @@ function App() {
     setEditMode(false);
   };
 
-  const handleSubmitForm = (event: AppEvent) => {
-    /* if (event.id) {
-      setSelectedEvent(event);
-      setEvents(events.map((ev) => (ev.id === event.id ? event : ev)));
-    } else {
-      const newEvent = { ...event, id: events.length.toString() };
-      setSelectedEvent(newEvent);
-      setEvents([...events, newEvent]);
-    } */
-    console.log(event);
-    setEditMode(false);
-  };
-
   const handleDeleteEvent = (id: string) => {
     //setEvents(events.filter((ev) => ev.id !== id));
     console.log(id);
@@ -67,7 +54,6 @@ function App() {
             editMode={editMode}
             openForm={handleOpenForm}
             closeForm={handleCloseForm}
-            submitForm={handleSubmitForm}
             deleteEvent={handleDeleteEvent}
           />
         )}
