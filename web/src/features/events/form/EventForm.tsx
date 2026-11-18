@@ -51,7 +51,11 @@ export default function EventForm({ event, closeForm }: Props) {
           label="Date"
           type="date"
           slotProps={{ inputLabel: { shrink: true } }}
-          defaultValue={event?.date}
+          defaultValue={
+            event?.date
+              ? new Date(event.date).toISOString().split("T")[0]
+              : new Date().toISOString().split("T")[0]
+          }
         />
         <TextField name="city" label="City" defaultValue={event?.city} />
         <TextField name="venue" label="Venue" defaultValue={event?.venue} />

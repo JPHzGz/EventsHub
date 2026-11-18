@@ -6,14 +6,24 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
+import { useEvents } from "../../../lib/hooks/useEvents";
 
 type Props = {
-  event: AppEvent;
+  selectedEvent: AppEvent;
   cancel: () => void;
   openForm: (id: string) => void;
 };
 
-export default function EventDetail({ event, cancel, openForm }: Props) {
+export default function EventDetail({
+  selectedEvent,
+  cancel,
+  openForm,
+}: Props) {
+  const { events } = useEvents();
+  const event = events?.find((ev) => ev.id === selectedEvent.id);
+  if (!event) {
+    return <Typography>Loading...</Typography>;
+  }
   return (
     <Card sx={{ borderRadius: 3 }}>
       <CardMedia

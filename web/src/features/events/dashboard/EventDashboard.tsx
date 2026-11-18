@@ -36,7 +36,7 @@ export default function EventDashboard({
       <Grid size={5}>
         {selectedEvent && !editMode && (
           <EventDetail
-            event={selectedEvent}
+            selectedEvent={selectedEvent}
             cancel={cancelSelectEvent}
             openForm={openForm}
           />
