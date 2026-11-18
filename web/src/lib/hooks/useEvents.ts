@@ -33,5 +33,16 @@ export const useEvents = () => {
     },
   });
 
-  return { events, isPending, updateEvent, createEvent };
+  const deleteEvent = useMutation({
+    mutationFn: async (id: string) => {
+      await agent.delete(`/events/${id}`);
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: ["events"],
+      });
+    },
+  });
+
+  return { events, isPending, updateEvent, createEvent, deleteEvent };
 };

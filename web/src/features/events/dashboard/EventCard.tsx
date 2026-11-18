@@ -7,14 +7,15 @@ import {
   Chip,
   Typography,
 } from "@mui/material";
+import { useEvents } from "../../../lib/hooks/useEvents";
 
 type Props = {
   event: AppEvent;
   selectEvent: (id: string) => void;
-  deleteEvent: (id: string) => void;
 };
 
-export default function EventCard({ event, selectEvent, deleteEvent }: Props) {
+export default function EventCard({ event, selectEvent }: Props) {
+  const { deleteEvent } = useEvents();
   return (
     <Card>
       <CardContent>
@@ -31,10 +32,11 @@ export default function EventCard({ event, selectEvent, deleteEvent }: Props) {
         <Chip label={event.category} variant="outlined" />
         <Box sx={{ display: "flex", gap: 1 }}>
           <Button
-            onClick={() => deleteEvent(event.id)}
+            onClick={() => deleteEvent.mutateAsync(event.id)}
             size="medium"
             variant="outlined"
             color="error"
+            loading={deleteEvent.isPending}
           >
             Delete
           </Button>
