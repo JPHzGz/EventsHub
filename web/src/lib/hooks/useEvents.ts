@@ -22,5 +22,16 @@ export const useEvents = () => {
     },
   });
 
-  return { events, isPending, updateEvent };
+  const createEvent = useMutation({
+    mutationFn: async (event: AppEvent) => {
+      await agent.post("/events", event);
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: ["events"],
+      });
+    },
+  });
+
+  return { events, isPending, updateEvent, createEvent };
 };

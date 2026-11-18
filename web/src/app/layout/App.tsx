@@ -39,10 +39,10 @@ function App() {
   };
 
   return (
-    <Box sx={{ bgcolor: "#f5faf7", height: "100vh" }}>
+    <Box sx={{ bgcolor: "#f5faf7", minHeight: "100vh", height: "auto" }}>
       <CssBaseline />
       <NavBar openForm={handleOpenForm} />
-      <Container maxWidth="xl" sx={{ mt: 4 }}>
+      <Container maxWidth="xl" sx={{ py: 4 }}>
         {!events || isPending ? (
           <Typography>Loading...</Typography>
         ) : (

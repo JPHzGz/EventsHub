@@ -7,7 +7,7 @@ type Props = {
 };
 
 export default function EventForm({ event, closeForm }: Props) {
-  const { updateEvent } = useEvents();
+  const { updateEvent, createEvent } = useEvents();
   const handleSubmit = async (
     formEvent: React.SubmitEvent<HTMLFormElement>,
   ) => {
@@ -20,8 +20,10 @@ export default function EventForm({ event, closeForm }: Props) {
     if (event) {
       data.id = event.id;
       await updateEvent.mutateAsync(data as unknown as AppEvent);
-      closeForm();
+    } else {
+      await createEvent.mutateAsync(data as unknown as AppEvent);
     }
+    closeForm();
   };
   return (
     <Paper sx={{ borderRadius: 3, p: 3 }}>
@@ -63,7 +65,11 @@ export default function EventForm({ event, closeForm }: Props) {
           <Button onClick={closeForm} color="error">
             Cancel
           </Button>
-          <Button type="submit" color="primary" loading={updateEvent.isPending}>
+          <Button
+            type="submit"
+            color="primary"
+            loading={updateEvent.isPending || createEvent.isPending}
+          >
             Save
           </Button>
         </Box>
