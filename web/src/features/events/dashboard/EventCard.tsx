@@ -11,10 +11,9 @@ import { useEvents } from "../../../lib/hooks/useEvents";
 
 type Props = {
   event: AppEvent;
-  selectEvent: (id: string) => void;
 };
 
-export default function EventCard({ event, selectEvent }: Props) {
+export default function EventCard({ event }: Props) {
   const { deleteEvent } = useEvents();
   return (
     <Card>
@@ -40,11 +39,7 @@ export default function EventCard({ event, selectEvent }: Props) {
           >
             Delete
           </Button>
-          <Button
-            onClick={() => selectEvent(event.id)}
-            size="medium"
-            variant="contained"
-          >
+          <Button onClick={() => {}} size="medium" variant="contained">
             View
           </Button>
         </Box>
