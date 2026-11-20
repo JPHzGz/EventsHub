@@ -2,13 +2,14 @@ import { Group } from "@mui/icons-material";
 import {
   AppBar,
   Box,
-  Button,
   Container,
   MenuItem,
   MenuList,
   Toolbar,
   Typography,
 } from "@mui/material";
+import { NavLink } from "react-router";
+import MenuItemLink from "../shared/MenuItemLink";
 
 export default function NavBar() {
   return (
@@ -20,7 +21,11 @@ export default function NavBar() {
         <Container maxWidth="xl">
           <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
             <MenuList>
-              <MenuItem sx={{ display: "flex", gap: 2 }}>
+              <MenuItem
+                component={NavLink}
+                to="/"
+                sx={{ display: "flex", gap: 2 }}
+              >
                 <Group fontSize="large" />
                 <Typography variant="h4" sx={{ fontWeight: "bold" }}>
                   Events Hub
@@ -28,18 +33,10 @@ export default function NavBar() {
               </MenuItem>
             </MenuList>
             <MenuList disablePadding sx={{ display: "flex" }}>
-              <MenuItem sx={{ fontSize: "1.2rem" }}>Events</MenuItem>
-              <MenuItem sx={{ fontSize: "1.2rem" }}>About</MenuItem>
-              <MenuItem sx={{ fontSize: "1.2rem" }}>Contact</MenuItem>
+              <MenuItemLink to="/events">Events</MenuItemLink>
+              <MenuItemLink to="/createEvent">Create Event</MenuItemLink>
             </MenuList>
-            <Button
-              onClick={() => {}}
-              size="large"
-              variant="contained"
-              color="success"
-            >
-              Create Event
-            </Button>
+            User Menu
           </Toolbar>
         </Container>
       </AppBar>
