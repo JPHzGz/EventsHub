@@ -6,21 +6,11 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import { useEvents } from "../../../lib/hooks/useEvents";
+import { Link, useNavigate } from "react-router";
 
-type Props = {
-  selectedEvent: AppEvent;
-  cancel: () => void;
-  openForm: (id: string) => void;
-};
-
-export default function EventDetail({
-  selectedEvent,
-  cancel,
-  openForm,
-}: Props) {
-  const { events } = useEvents();
-  const event = events?.find((ev) => ev.id === selectedEvent.id);
+export default function EventDetail() {
+  const navigate = useNavigate();
+  const event = {} as AppEvent;
   if (!event) {
     return <Typography>Loading...</Typography>;
   }
@@ -38,10 +28,10 @@ export default function EventDetail({
         <Typography variant="body1">{event.description}</Typography>
       </CardContent>
       <CardActions>
-        <Button onClick={() => openForm(event.id)} color="success">
+        <Button component={Link} to={`/events/${event.id}`} color="success">
           Edit
         </Button>
-        <Button onClick={cancel} color="inherit">
+        <Button onClick={() => navigate("/events")} color="inherit">
           Cancel
         </Button>
       </CardActions>

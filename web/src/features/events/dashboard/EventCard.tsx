@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useEvents } from "../../../lib/hooks/useEvents";
+import { Link } from "react-router";
 
 type Props = {
   event: AppEvent;
@@ -39,7 +40,12 @@ export default function EventCard({ event }: Props) {
           >
             Delete
           </Button>
-          <Button onClick={() => {}} size="medium" variant="contained">
+          <Button
+            component={Link}
+            to={`/events/${event.id}`}
+            size="medium"
+            variant="contained"
+          >
             View
           </Button>
         </Box>
