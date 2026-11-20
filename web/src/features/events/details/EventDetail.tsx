@@ -6,13 +6,18 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
+import { useEvents } from "../../../lib/hooks/useEvents";
 
 export default function EventDetail() {
   const navigate = useNavigate();
-  const event = {} as AppEvent;
-  if (!event) {
+  const { id } = useParams();
+  const { event, isLoading } = useEvents(id);
+  if (isLoading) {
     return <Typography>Loading...</Typography>;
+  }
+  if (!event) {
+    return <Typography>Event not found</Typography>;
   }
   return (
     <Card sx={{ borderRadius: 3 }}>

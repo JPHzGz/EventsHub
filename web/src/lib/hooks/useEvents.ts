@@ -1,14 +1,24 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import agent from "../api/agents";
 
-export const useEvents = () => {
+export const useEvents = (id?: string) => {
   const queryClient = useQueryClient();
+
   const { data: events, isPending } = useQuery({
     queryKey: ["events"],
     queryFn: async () => {
       const res = await agent.get<AppEvent[]>("/events");
       return res.data;
     },
+  });
+
+  const { data: event, isLoading } = useQuery({
+    queryKey: ["events", id],
+    queryFn: async () => {
+      const res = await agent.get<AppEvent>(`/events/${id}`);
+      return res.data;
+    },
+    enabled: !!id,
   });
 
   const updateEvent = useMutation({
@@ -44,5 +54,13 @@ export const useEvents = () => {
     },
   });
 
-  return { events, isPending, updateEvent, createEvent, deleteEvent };
+  return {
+    events,
+    isPending,
+    event,
+    isLoading,
+    updateEvent,
+    createEvent,
+    deleteEvent,
+  };
 };
