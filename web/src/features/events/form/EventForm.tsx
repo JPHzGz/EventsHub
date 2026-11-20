@@ -33,7 +33,7 @@ export default function EventForm() {
   return (
     <Paper sx={{ borderRadius: 3, p: 3 }}>
       <Typography variant="h5" gutterBottom color="primary">
-        Create event
+        {event ? "Edit event" : "Create event"}
       </Typography>
       <Box
         component="form"

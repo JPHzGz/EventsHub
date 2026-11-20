@@ -24,11 +24,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "createEvent",
-        element: <EventForm />,
+        element: <EventForm key="create" />,
       },
       {
         path: "manage/:id",
-        element: <EventForm />,
+        element: <EventForm key="manage" />,
       },
     ],
   },
