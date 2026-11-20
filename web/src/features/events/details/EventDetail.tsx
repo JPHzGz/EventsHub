@@ -33,7 +33,7 @@ export default function EventDetail() {
         <Typography variant="body1">{event.description}</Typography>
       </CardContent>
       <CardActions>
-        <Button component={Link} to={`/events/${event.id}`} color="success">
+        <Button component={Link} to={`/manage/${event.id}`} color="success">
           Edit
         </Button>
         <Button onClick={() => navigate("/events")} color="inherit">

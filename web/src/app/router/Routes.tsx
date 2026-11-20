@@ -26,6 +26,10 @@ export const router = createBrowserRouter([
         path: "createEvent",
         element: <EventForm />,
       },
+      {
+        path: "manage/:id",
+        element: <EventForm />,
+      },
     ],
   },
 ]);

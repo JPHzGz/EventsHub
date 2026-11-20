@@ -1,9 +1,11 @@
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import { useEvents } from "../../../lib/hooks/useEvents";
+import { useNavigate, useParams } from "react-router";
 
 export default function EventForm() {
-  const { updateEvent, createEvent } = useEvents();
-  const event = {} as AppEvent;
+  const { id } = useParams();
+  const { event, isLoading, updateEvent, createEvent } = useEvents(id);
+  const navigate = useNavigate();
   const handleSubmit = async (
     formEvent: React.SubmitEvent<HTMLFormElement>,
   ) => {
@@ -16,10 +18,18 @@ export default function EventForm() {
     if (event) {
       data.id = event.id;
       await updateEvent.mutateAsync(data as unknown as AppEvent);
+      navigate(`/events/${event.id}`);
     } else {
-      await createEvent.mutateAsync(data as unknown as AppEvent);
+      createEvent.mutateAsync(data as unknown as AppEvent, {
+        onSuccess: (id) => {
+          navigate(`/events/${id}`);
+        },
+      });
     }
   };
+  if (isLoading) {
+    return <Typography>Loading...</Typography>;
+  }
   return (
     <Paper sx={{ borderRadius: 3, p: 3 }}>
       <Typography variant="h5" gutterBottom color="primary">

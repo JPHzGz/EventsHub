@@ -34,7 +34,8 @@ export const useEvents = (id?: string) => {
 
   const createEvent = useMutation({
     mutationFn: async (event: AppEvent) => {
-      await agent.post("/events", event);
+      const res = await agent.post("/events", event);
+      return res.data;
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({
