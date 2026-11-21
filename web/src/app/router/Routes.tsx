@@ -3,7 +3,7 @@ import App from "../layout/App";
 import HomePage from "../../features/home/HomePage";
 import EventDashboard from "../../features/events/dashboard/EventDashboard";
 import EventForm from "../../features/events/form/EventForm";
-import EventDetail from "../../features/events/details/EventDetail";
+import EventDetailsPage from "../../features/events/details/EventDetailsPage";
 
 export const router = createBrowserRouter([
   {
@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "events/:id",
-        element: <EventDetail />,
+        element: <EventDetailsPage />,
       },
       {
         path: "createEvent",
