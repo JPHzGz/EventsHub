@@ -18,8 +18,8 @@ export default function EventDetailsPage() {
   return (
     <Grid container spacing={3}>
       <Grid size={8}>
-        <EventDetailsHeader />
-        <EventDetailsInfo />
+        <EventDetailsHeader event={event} />
+        <EventDetailsInfo event={event} />
         <EventDetailsChat />
       </Grid>
       <Grid size={4}>
