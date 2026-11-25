@@ -1,5 +1,6 @@
 import { Badge, Box, Button, Card, CardMedia, Typography } from "@mui/material";
 import { Link } from "react-router";
+import { formatDate } from "../../../lib/utils/util";
 
 type Props = {
   event: AppEvent;
@@ -52,7 +53,7 @@ export default function EventDetailsHeader({ event }: Props) {
           <Typography variant="h4" sx={{ fontWeight: "bold" }}>
             {event.title}
           </Typography>
-          <Typography variant="subtitle1">{event.date}</Typography>
+          <Typography variant="subtitle1">{formatDate(event.date)}</Typography>
           <Typography variant="subtitle2">
             Hosted by{" "}
             <Link

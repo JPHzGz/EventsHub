@@ -1,5 +1,6 @@
 import { CalendarToday, Info, Place } from "@mui/icons-material";
 import { Divider, Grid, Paper, Typography } from "@mui/material";
+import { formatDate } from "../../../lib/utils/util";
 
 type Props = {
   event: AppEvent;
@@ -22,7 +23,7 @@ export default function EventDetailsInfo({ event }: Props) {
           <CalendarToday color="info" fontSize="large" />
         </Grid>
         <Grid size={11}>
-          <Typography>{event.date}</Typography>
+          <Typography>{formatDate(event.date)}</Typography>
         </Grid>
       </Grid>
       <Divider />

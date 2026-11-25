@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Link } from "react-router";
+import { formatDate } from "../../../lib/utils/util";
 
 type Props = {
   event: AppEvent;
@@ -60,8 +61,12 @@ export default function EventCard({ event }: Props) {
       <Divider sx={{ mb: 3 }} />
       <CardContent sx={{ p: 0 }}>
         <Box sx={{ display: "flex", alignItems: "center", mb: 2, px: 2 }}>
-          <AccessTime sx={{ mr: 1 }} />
-          <Typography variant="body2">{event.date}</Typography>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <AccessTime sx={{ mr: 1 }} />
+            <Typography variant="body2" noWrap>
+              {formatDate(event.date)}
+            </Typography>
+          </Box>
           <Place sx={{ ml: 3, mr: 1 }} />
           <Typography variant="body2">{event.venue}</Typography>
         </Box>
